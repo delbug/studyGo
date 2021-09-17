@@ -3,7 +3,7 @@ package main
 import "fmt"
 
 /*
-// 切换 属于数组，但不是数组
+	切换 属于数组，但不是数组
 
 */
 func main() {
