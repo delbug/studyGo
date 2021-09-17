@@ -2,116 +2,67 @@ package main
 
 import "fmt"
 
-/*
-	切换 属于数组，但不是数组
+/*	map:类似于其他语言字典，或者哈希表的东西表现为 key-value
+
+      m    := map[int]bool{}
+	变量名 := map[key的类型] value的类型{}
 
 */
+
 func main() {
-	fmt.Println("******************************")
-	fmt.Println("[数组] ↓↓↓ ********************************")
+	fmt.Println("--------------------------")
+	// m2 := make(map[string]string)
 
-	a := [3]int{0, 1, 2}
-	//[元素长度]元素类型{元素1,元素2}
-	fmt.Println(a)
+	var m map[string]string
+	m = map[string]string{} //  这种 声明一定要赋值
+	m["name"] = "张三"
+	m["sex"] = "男生"
+	fmt.Println(m) // map[name:张三 sex:男生]
+	fmt.Println("string{} ↑↑↑--------------------------")
 
-	b := [...]int{1, 2, 3, 4, 5, 6, 7, 8}
-	fmt.Println(b)
+	m1 := map[string]string{}
+	m1["name"] = "李四"
+	m1["sex"] = "女生"
+	fmt.Println(m1) // map[name:张三 sex:男生]
+	fmt.Println("string{} ↑↑↑--------------------------")
 
-	var c = new([10]int)
-	c[2] = 3 // 设置第二个为 3
-	fmt.Println(c)
-	fmt.Println("[数组] ↑↑↑ ********************************")
-	fmt.Println("[循环数组] ↓↓↓ ********************************")
+	m2 := map[int]bool{}
+	m2[1] = true
+	m2[2] = false
+	fmt.Println(m2) // map[1:true 2:false]
+	fmt.Println("bool{} ↑↑↑--------------------------")
 
-	zoom := [...]string{"狗子", "猫猫", "猴子"}
-	for i := 0; i < len(zoom); i++ {
-		fmt.Println(zoom[i])
+	m3 := map[int]interface{}{}
+	m3[1] = 123
+	m3[2] = false
+	m3[3] = "strrr"
+	m3[4] = []int{1, 2, 3}
+	fmt.Println(m3) //	 map[1:123 2:false 3:strrr 4:[1 2 3]]
+	fmt.Println("interface ↑↑↑--------------------------")
+
+	m4 := map[int]interface{}{}
+	m4[1] = 123
+	m4[2] = false
+	m4[3] = "strrr"
+	m4[4] = []int{1, 2, 3}
+	delete(m4, 4)                // 	删除第四项
+	fmt.Println("删除之后", m4)      // 	map[1:123 2:false 3:strrr]
+	fmt.Println("m4长度", len(m4)) // 	map[1:123 2:false 3:strrr]
+	fmt.Println("delete ↑↑↑--------------------------")
+
+	m5 := map[string]interface{}{}
+	m5["a"] = 123
+	m5["b"] = false
+	m5["c"] = "strrr"
+	m5["d"] = []int{1, 2, 3}
+
+	for k, v := range m5 {
+		fmt.Println(k, v)
 	}
-	fmt.Println("[循环数组] ↑↑↑ ********************************")
-
-	fmt.Println("[range] ↓↓↓ ********************************")
-	/*
-		range zoom里的每一项 ，等同于前端forEach里的 res
-	*/
-	for i, v := range zoom {
-		fmt.Println(i, v)
-	}
-	fmt.Println("[range] ↑↑↑ ********************************")
-
-	fmt.Println("长度", len(zoom))
-	fmt.Println("容器", cap(zoom))
-
-	fmt.Println("[下标越界] ↓↓↓ ********************************")
-	//d := [3]int{0, 1, 2}
-	//d[3] = 4 // 下标越界  ； 无效的 数组 索引 '3' (3 元素的数组超出界限)
-	//fmt.Println(d)
-	fmt.Println("[下标越界] ↑↑↑ ********************************")
-
-	fmt.Println("[二维数组] ↓↓↓ ********************************")
-	er := [3][3]int{
-		{0, 1, 2},
-		{1, 2, 3},
-		{2, 3, 4},
-	}
-	fmt.Println(er)
-	fmt.Println("[二维数组] ↑↑↑ ********************************")
-
-	fmt.Println("[操作数组] ↓↓↓ ********************************")
-
-	hh := [5]int{1, 2, 3, 4}
-	cls := hh[2]
-	fmt.Println("获取数组索引2的元素: ", cls)
-	cls = 5
-	fmt.Println("把cls赋值5: ", cls)
-	fmt.Println("hh:", hh)
-
-	gg := [5]int{0, 1, 2, 3, 4}
-	cl := gg[2:]
-	fmt.Println("从数组索引2开始到最后: ", cl)
-	cl[0] = 5
-	fmt.Println("把新的数组0索引改成5: ", cl)
-	fmt.Println("gg:", gg)
-	fmt.Println("[操作数组] ↑↑↑ ********************************")
-
-	fmt.Println("[切片] ↓↓↓ ********************************")
-	j := [5]int{0, 1, 2, 3, 4}
-	clJ := j[:]
-	clJ0 := j[0:3]
-	clJ1 := j[:3]
-	clJ2 := j[1:]
-	clJ3 := append(clJ, 5, 6) // 切片
-
-	fmt.Println("clJ 整个数组：", clJ)
-	fmt.Println("clJ0  取0项到3，不包含3：", clJ0)
-	fmt.Println("clJ1 取0项到3，不包含3：", clJ1)
-	fmt.Println("clJ2 从索引1开始取后面的：", clJ2)
-	fmt.Println("clJ3 在数组后面追加：", clJ3)
-
-	fmt.Println("[copy] ↓↓↓ ********************************")
-
-	k := [6]int{1, 2, 3, 4, 5, 6}
-	k1 := k[2:]
-	k2 := k[1:3]
-
-	fmt.Println("k1,k2====", k1, k2) // [3 4 5 6] [2]
-	//copy(k1, k2)                     		// [3 4 5 6] k2的数据把k1前面的给覆盖了
-	copy(k1[2:], k2) // [3 4 2 3] k2的数据[2 3] 把k1数据[3 4 5 6]前面的 5 6 给覆盖了
-	fmt.Println("k2的数据把k1前面的给覆盖了:", k1)
-
-	fmt.Println("[copy] ↑↑↑ ********************************")
-
-	fmt.Println("[创造切片] ↓↓↓ ********************************")
-	var m []int // 使用var创建的切片 空的
-	fmt.Println("使用var创建的切片", m)
-
-	mm := make([]int, 4) // 使用make创建的切片  4个0
-	fmt.Println("使用make创建的切片", mm)
-	fmt.Println("[创造切片] ↑↑↑ ********************************")
-
-	fmt.Println("[切片] ↑↑↑ ********************************")
+	fmt.Println("range 循环数组 ↑↑↑--------------------------")
 
 	// fmt.Println("[] ↓↓↓ ********************************")
-	// fmt.Println("[] ↑↑↑ ********************************")s
+	// fmt.Println("[] ↑↑↑ ********************************")
 
 }
 
