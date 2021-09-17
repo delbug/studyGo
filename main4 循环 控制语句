@@ -1,0 +1,116 @@
+package main
+
+import "fmt"
+
+/****************************************************************
+1-3课
+	testPK "studyGo/testpackage"
+	testPK  别名  调用A: fmt.Println(testPK.A)
+	***************************************************************
+	testPK "studyGo/testpackage"
+	testPK  别名  调用A: fmt.Println(testPK.A)
+	***************************************************************
+	. "studyGo/testpackage"
+	调用A: fmt.Println(A)
+	***************************************************************
+	导出的变量或方法大写字母 开头才可以拿给别的包使用，小写开头的为私有的
+	***************************************************************
+	导入多个不同的包，多个包里面的变量名不能重复，不然会提示红波浪线
+	***************************************************************
+
+三
+	switch 默认有 break
+
+*/
+
+func main() {
+	fmt.Println("if else  ↓↓↓ ********************************")
+	a := 4
+	if a > 3 {
+		fmt.Println("大于3")
+	} else if a == 1 {
+		fmt.Println("等于1")
+	} else {
+		fmt.Println("都不在")
+	}
+	fmt.Println("if else  ↑↑↑  ********************************")
+
+	fmt.Println("switch  ↓↓↓ ********************************")
+	b := 3
+	switch b {
+	case 0:
+		fmt.Println("0")
+	case 1:
+		fmt.Println("1")
+		fallthrough // 继续执行下一个
+	case 2:
+		fmt.Println("2")
+	case 3:
+		fmt.Println("3")
+		fallthrough // 继续执行下一个
+	default:
+		fmt.Println("都没有")
+	}
+
+	fmt.Println("switch  ↑↑↑  ********************************")
+
+	fmt.Println("循环语句  ↓↓↓ ********************************")
+
+	fmt.Println("第1种循环 ↓↓↓")
+	c := 0
+	for {
+		c++
+		fmt.Println("第1种循环 ", c)
+		if c > 10 {
+			break
+		}
+	}
+	fmt.Println("第1种循环 ↑↑↑")
+
+	fmt.Println("第2种循环 ↓↓↓")
+	for d := 0; d < 10; d++ {
+		fmt.Println(d)
+	}
+	fmt.Println("第2种循环 ↑↑↑")
+
+	fmt.Println("第3种循环 ↓↓↓")
+	d := 0
+	for d < 10 {
+		d++
+		fmt.Println(d)
+	}
+	fmt.Println("第3种循环 ↑↑↑")
+
+	fmt.Println("跳出循环  ↓↓↓")
+	d = 0
+	for d < 10 {
+		d++
+		if d == 5 {
+			continue // 跳出 5 这一项
+		}
+		fmt.Println(d)
+	}
+
+	fmt.Println("跳出循环  ↑↑↑")
+	fmt.Println("循环语句  ↑↑↑  ********************************")
+
+	fmt.Println("goto跳转语句 ↓↓↓ ********************************")
+	ff := 0
+A:
+	for ff < 10 {
+		ff++
+		fmt.Println(ff)
+		if ff == 5 {
+			break A
+			goto B
+		}
+	}
+
+B:
+	fmt.Println("我已经来到B ")
+
+	fmt.Println("goto跳转语句 ↑↑↑ ********************************")
+
+	// fmt.Println("  ↓↓↓ ********************************")
+	// fmt.Println("  ↑↑↑ ********************************")
+}

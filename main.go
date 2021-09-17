@@ -1,146 +1,119 @@
 package main
 
-import (
-	"fmt"
-	"strconv"
-	dog "studyGo/study1-2/dog"
-	testPK "studyGo/study1-2/testpackage"
-	//
-	/****************************************************************
-	二
-		testPK "studyGo/testpackage"
-		testPK  别名  调用A: fmt.Println(testPK.A)
-		***************************************************************
-		testPK "studyGo/testpackage"
-		testPK  别名  调用A: fmt.Println(testPK.A)
-		***************************************************************
-		. "studyGo/testpackage"
-		调用A: fmt.Println(A)
-		***************************************************************
-		导出的变量或方法大写字母 开头才可以拿给别的包使用，小写开头的为私有的
-		***************************************************************
-		导入多个不同的包，多个包里面的变量名不能重复，不然会提示红波浪线
-		***************************************************************
+import "fmt"
 
-	三
-		1
-	*/)
+/*
+// 切换 属于数组，但不是数组
 
+*/
 func main() {
-	fmt.Println("1-2课 ↓↓↓ ********************************")
-	var a string = "main-aaaaa"
-	// 关键字 变量名 变量类型 = 变量值
-	c := 123
-	d := true
+	fmt.Println("******************************")
+	fmt.Println("[数组] ↓↓↓ ********************************")
+
+	a := [3]int{0, 1, 2}
+	//[元素长度]元素类型{元素1,元素2}
 	fmt.Println(a)
+
+	b := [...]int{1, 2, 3, 4, 5, 6, 7, 8}
+	fmt.Println(b)
+
+	var c = new([10]int)
+	c[2] = 3 // 设置第二个为 3
 	fmt.Println(c)
-	fmt.Println(d)
-	fmt.Println(testPK.A)
-	fmt.Println(testPK.B)
-	fmt.Println(testPK.E)
-	fmt.Println(testPK.F)
-	// fmt.Println(testPK.f) // 导出的变量或方法大写字母开头才可以拿给别的方法使用，小写开头的为私有的
-	fmt.Println(dog.DogName)
-	fmt.Println(testPK.Catname)
-	fmt.Println("1-2课 ↑↑↑ ********************************")
+	fmt.Println("[数组] ↑↑↑ ********************************")
+	fmt.Println("[循环数组] ↓↓↓ ********************************")
 
-	fmt.Println("3课 ↓↓↓ ********************************")
-	fmt.Println("取值范围 ↓↓↓ ********************************")
-	var num1 uint = 999 // 正整数
-	var num2 int = -999 // 全部整数
-	var num3 int8 = 100 // -128 --> 128 之间
+	zoom := [...]string{"狗子", "猫猫", "猴子"}
+	for i := 0; i < len(zoom); i++ {
+		fmt.Println(zoom[i])
+	}
+	fmt.Println("[循环数组] ↑↑↑ ********************************")
 
-	fmt.Println("uint-正整数:", num1)
-	fmt.Println("int-全部整数:", num2)
-	fmt.Println("int8 -128-->128:", num3)
+	fmt.Println("[range] ↓↓↓ ********************************")
+	/*
+		range zoom里的每一项 ，等同于前端forEach里的 res
+	*/
+	for i, v := range zoom {
+		fmt.Println(i, v)
+	}
+	fmt.Println("[range] ↑↑↑ ********************************")
 
-	fmt.Println("取值范围 ↑↑↑  ********************************")
+	fmt.Println("长度", len(zoom))
+	fmt.Println("容器", cap(zoom))
 
-	fmt.Println("浮点型 ↓↓↓ ********************************")
-	var num4 float64 = 3.1415926 // 小数点后面 2的多少次方
-	fmt.Println("float64:", num4)
-	fmt.Println("浮点型 ↑↑↑  ********************************")
+	fmt.Println("[下标越界] ↓↓↓ ********************************")
+	//d := [3]int{0, 1, 2}
+	//d[3] = 4 // 下标越界  ； 无效的 数组 索引 '3' (3 元素的数组超出界限)
+	//fmt.Println(d)
+	fmt.Println("[下标越界] ↑↑↑ ********************************")
 
-	fmt.Println("字符串类型 ↓↓↓ ********************************")
-	var str5 string = "我是字符串str--"
-	fmt.Println("string:", str5)
-	// fmt.Printf(format:"%T", str5)
-	// fmt.Printf("str5 检测类型为:%T ", str5)
+	fmt.Println("[二维数组] ↓↓↓ ********************************")
+	er := [3][3]int{
+		{0, 1, 2},
+		{1, 2, 3},
+		{2, 3, 4},
+	}
+	fmt.Println(er)
+	fmt.Println("[二维数组] ↑↑↑ ********************************")
 
-	fmt.Println("字符串类型 ↑↑↑  ********************************")
+	fmt.Println("[操作数组] ↓↓↓ ********************************")
 
-	fmt.Println("布尔值  ↓↓↓ ********************************")
-	var bool6 bool = true
+	hh := [5]int{1, 2, 3, 4}
+	cls := hh[2]
+	fmt.Println("获取数组索引2的元素: ", cls)
+	cls = 5
+	fmt.Println("把cls赋值5: ", cls)
+	fmt.Println("hh:", hh)
 
-	fmt.Println("bool:", bool6)
-	// fmt.Printf("bool6 检测类型为:%T", bool6)
+	gg := [5]int{0, 1, 2, 3, 4}
+	cl := gg[2:]
+	fmt.Println("从数组索引2开始到最后: ", cl)
+	cl[0] = 5
+	fmt.Println("把新的数组0索引改成5: ", cl)
+	fmt.Println("gg:", gg)
+	fmt.Println("[操作数组] ↑↑↑ ********************************")
 
-	fmt.Println("布尔值  ↑↑↑  ********************************")
+	fmt.Println("[切片] ↓↓↓ ********************************")
+	j := [5]int{0, 1, 2, 3, 4}
+	clJ := j[:]
+	clJ0 := j[0:3]
+	clJ1 := j[:3]
+	clJ2 := j[1:]
+	clJ3 := append(clJ, 5, 6) // 切片
 
-	fmt.Println("检测类型  ↓↓↓ ********************************")
-	var str8 string = "检测类型str--"
-	fmt.Printf("str8 检测类型为: %T ", str8)
-	fmt.Println("")
+	fmt.Println("clJ 整个数组：", clJ)
+	fmt.Println("clJ0  取0项到3，不包含3：", clJ0)
+	fmt.Println("clJ1 取0项到3，不包含3：", clJ1)
+	fmt.Println("clJ2 从索引1开始取后面的：", clJ2)
+	fmt.Println("clJ3 在数组后面追加：", clJ3)
 
-	var bool9 bool = true
-	fmt.Printf("bool9 检测类型为: %T ", bool9)
-	fmt.Println("")
+	fmt.Println("[copy] ↓↓↓ ********************************")
 
-	var num10 int = 10
-	var num11 uint = 999
-	fmt.Println(" num10,", num10)
-	fmt.Printf(",num10 检测类型为: %T ", num10)
-	fmt.Printf(",123检测类型为: %T ", 123)
-	fmt.Printf(",999检测类型为: %T ", num11)
-	fmt.Printf(",9999检测类型为: %T ", 9999)
-	fmt.Printf(",-123检测类型为: %T ", -1)
-	fmt.Printf(",123.45检测类型为: %T ", 123.45)
-	fmt.Printf(",-123.45检测类型为: %T ", -123.45)
+	k := [6]int{1, 2, 3, 4, 5, 6}
+	k1 := k[2:]
+	k2 := k[1:3]
 
-	fmt.Println("")
+	fmt.Println("k1,k2====", k1, k2) // [3 4 5 6] [2]
+	//copy(k1, k2)                     		// [3 4 5 6] k2的数据把k1前面的给覆盖了
+	copy(k1[2:], k2) // [3 4 2 3] k2的数据[2 3] 把k1数据[3 4 5 6]前面的 5 6 给覆盖了
+	fmt.Println("k2的数据把k1前面的给覆盖了:", k1)
 
-	fmt.Println("检测类型  ↑↑↑  ********************************")
+	fmt.Println("[copy] ↑↑↑ ********************************")
 
-	fmt.Println("转化数据类型  ↓↓↓ ********************************")
-	var str12 string = "str12"
-	fmt.Println(str12)
-	fmt.Printf("str12数据类型： %T", str12)
+	fmt.Println("[创造切片] ↓↓↓ ********************************")
+	var m []int // 使用var创建的切片 空的
+	fmt.Println("使用var创建的切片", m)
 
-	fmt.Println("")
+	mm := make([]int, 4) // 使用make创建的切片  4个0
+	fmt.Println("使用make创建的切片", mm)
+	fmt.Println("[创造切片] ↑↑↑ ********************************")
 
-	var strr13 string = "131313"
-	strr14, err := strconv.Atoi(strr13)
-	fmt.Println("转化结果：", strr14)
-	fmt.Printf("字符串---》数字类：%T", strr14)
-	fmt.Println("，检测结果：", err)
-	fmt.Println("")
+	fmt.Println("[切片] ↑↑↑ ********************************")
 
-	var strr15 string = "1555555"
-	strrr15, err := strconv.ParseInt(strr15, 10, 64)
-	fmt.Println("string到int64：", strrr15)
-	fmt.Println("，检测结果：", err)
+	// fmt.Println("[] ↓↓↓ ********************************")
+	// fmt.Println("[] ↑↑↑ ********************************")s
 
-	fmt.Println("")
-
-	fmt.Println("转化数据类型  ↑↑↑  ********************************")
-
-	fmt.Println("隐式声明  ↓↓↓ ********************************")
-
-	str16 := "字符串str16"
-	num16 := 1616
-	num166 := 16.6
-	bool16 := true
-
-	fmt.Println((str16))
-	fmt.Println(num16)
-	fmt.Println(num166)
-	fmt.Println(bool16)
-	fmt.Printf("%T,%T,%T,%T", str16, num16, num166, bool16)
-	fmt.Println("")
-
-	fmt.Println("隐式声明  ↑↑↑  ********************************")
-	fmt.Println("3课 ↑↑↑ ********************************")
-
-	// fmt.Println("  ↓↓↓ ********************************")
-	// fmt.Println("  ↑↑↑  ********************************")
 }
+
+// fmt.Println("[] ↓↓↓ ********************************")
+// fmt.Println("[] ↑↑↑ ********************************")
