@@ -2,6 +2,7 @@ package main
 
 import (
 	"fmt"
+	"strconv"
 	dog "studyGo/study1-2/dog"
 	testPK "studyGo/study1-2/testpackage"
 	//
@@ -78,13 +79,66 @@ func main() {
 
 	fmt.Println("检测类型  ↓↓↓ ********************************")
 	var str8 string = "检测类型str--"
-	var bool9 bool = true
 	fmt.Printf("str8 检测类型为: %T ", str8)
 	fmt.Println("")
+
+	var bool9 bool = true
 	fmt.Printf("bool9 检测类型为: %T ", bool9)
 	fmt.Println("")
+
+	var num10 int = 10
+	var num11 uint = 999
+	fmt.Println(" num10,", num10)
+	fmt.Printf(",num10 检测类型为: %T ", num10)
+	fmt.Printf(",123检测类型为: %T ", 123)
+	fmt.Printf(",999检测类型为: %T ", num11)
+	fmt.Printf(",9999检测类型为: %T ", 9999)
+	fmt.Printf(",-123检测类型为: %T ", -1)
+	fmt.Printf(",123.45检测类型为: %T ", 123.45)
+	fmt.Printf(",-123.45检测类型为: %T ", -123.45)
+
+	fmt.Println("")
+
 	fmt.Println("检测类型  ↑↑↑  ********************************")
 
+	fmt.Println("转化数据类型  ↓↓↓ ********************************")
+	var str12 string = "str12"
+	fmt.Println(str12)
+	fmt.Printf("str12数据类型： %T", str12)
+
+	fmt.Println("")
+
+	var strr13 string = "131313"
+	strr14, err := strconv.Atoi(strr13)
+	fmt.Println("转化结果：", strr14)
+	fmt.Printf("字符串---》数字类：%T", strr14)
+	fmt.Println("，检测结果：", err)
+	fmt.Println("")
+
+	var strr15 string = "1555555"
+	strrr15, err := strconv.ParseInt(strr15, 10, 64)
+	fmt.Println("string到int64：", strrr15)
+	fmt.Println("，检测结果：", err)
+
+	fmt.Println("")
+
+	fmt.Println("转化数据类型  ↑↑↑  ********************************")
+
+	fmt.Println("隐式声明  ↓↓↓ ********************************")
+
+	str16 := "字符串str16"
+	num16 := 1616
+	num166 := 16.6
+	bool16 := true
+
+	fmt.Println((str16))
+	fmt.Println(num16)
+	fmt.Println(num166)
+	fmt.Println(bool16)
+	fmt.Printf("%T,%T,%T,%T", str16, num16, num166, bool16)
+	fmt.Println("")
+
+	fmt.Println("隐式声明  ↑↑↑  ********************************")
 	fmt.Println("3课 ↑↑↑ ********************************")
 
 	// fmt.Println("  ↓↓↓ ********************************")
